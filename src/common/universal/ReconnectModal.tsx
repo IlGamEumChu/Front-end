@@ -34,18 +34,6 @@ const ReconnectModal = () => {
             backgroundColor: colors.white,
             borderRadius: 6,
           }}>
-          <Image
-            source={require('../../assets/image/right_nanal.png')}
-            style={{
-              width: 318,
-              height: 175,
-              position: 'absolute',
-              bottom: 0,
-              right: -20,
-              resizeMode: 'contain',
-              zIndex: 2,
-            }}
-          />
           <Margin._25 />
           <Margin.CustomWidth margin={40} style={{zIndex: 1}} />
           <View style={{alignItems: 'center'}}>

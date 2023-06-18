@@ -8,12 +8,17 @@ import {colors} from '../../common/universal/Color';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {LoginStackParamList} from './LoginNavigator';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
+import {setAccessToken} from '../../app/Slices/myPageSlice';
+
 const SignUp = () => {
   const [id, setId] = useState<string>('');
   const [pw, setPw] = useState<string>('');
   const [pwConfirm, setPwConfirm] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
-
+  const dispatch = useDispatch();
   const navigation = useNavigation<StackNavigationProp<LoginStackParamList>>();
   return (
     <SafeAreaView
@@ -106,7 +111,23 @@ const SignUp = () => {
             justifyContent: 'center',
             backgroundColor: '#E97777',
           }}
-          onPress={() => navigation.navigate('IdentityVerification')}>
+          onPress={() => {
+            axios
+              .post('/api/v2/auth/signup', {
+                email: id,
+                name: nickname,
+                password: pw,
+              })
+              .then(res => {
+                console.log('회원가입 성공');
+                AsyncStorage.setItem('accessToken', res.data.data.accessToken);
+                dispatch(setAccessToken(res.data.data.accessToken));
+                navigation.navigate('SignUpCompleted');
+              })
+              .catch(err => {
+                console.log(err, '회원가입 실패');
+              });
+          }}>
           <NText.SB18 text={'다음'} color={colors.white} />
         </TouchableOpacity>
       </View>

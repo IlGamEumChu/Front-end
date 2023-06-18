@@ -1,20 +1,46 @@
 import React from 'react';
-import {SafeAreaView, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {LoginStackParamList} from './LoginNavigator';
-import {NText} from '../../common/universal/NText';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import MainMenu from '../Main/MainMenu';
+import DiaryResult from '../Main/DiaryResult';
+import CreateDiaryWithText from '../Main/CreateDiaryWithText';
+import CreateDiaryWithImage from '../Main/CreateDiaryWithImage';
 
+export type MainStackParamList = {
+  MainMenu: undefined;
+  DiaryResult: undefined;
+  CreateDiaryWithText: undefined;
+  CreateDiaryWithImage: undefined;
+};
 const MainNavigator = () => {
-  const navigation = useNavigation<StackNavigationProp<LoginStackParamList>>();
+  const MainStack = createNativeStackNavigator();
+
   return (
-    <SafeAreaView
-      style={{flex: 1, backgroundColor: '#FEFCF3', alignItems: 'center'}}>
-      <View style={{width: '100%', paddingHorizontal: 17}}>
-        <NText.SB26 text={'일기 작성'} color={'#3F3D56'} />
-        <NText.SB14 text={'자동으로 음악을 추천해드려요.'} color={'#3F3D56'} />
-      </View>
-    </SafeAreaView>
+    <MainStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName={'MainMenu'}>
+      <MainStack.Screen
+        name="MainMenu"
+        component={MainMenu}
+        options={{gestureEnabled: true}}
+      />
+      <MainStack.Screen
+        name="DiaryResult"
+        component={DiaryResult}
+        options={{gestureEnabled: true}}
+      />
+      <MainStack.Screen
+        name="CreateDiaryWithText"
+        component={CreateDiaryWithText}
+        options={{gestureEnabled: true}}
+      />
+      <MainStack.Screen
+        name="CreateDiaryWithImage"
+        component={CreateDiaryWithImage}
+        options={{gestureEnabled: true}}
+      />
+    </MainStack.Navigator>
   );
 };
 

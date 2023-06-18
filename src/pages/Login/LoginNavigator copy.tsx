@@ -4,14 +4,14 @@ import Onboarding from './Onboarding';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import MainNavigator from './MainNavigator';
-import SignUpCompleted from './SignUpCompleted';
+import IdentityVerification from './IdentityVerification';
 
 export type LoginStackParamList = {
   Onboarding: undefined;
   SignIn: undefined;
   SignUp: undefined;
   MainNavigator: undefined;
-  SignUpCompleted: undefined;
+  IdentityVerification: undefined;
 };
 
 const LoginNavigator = () => {
@@ -44,8 +44,8 @@ const LoginNavigator = () => {
         options={{gestureEnabled: true}}
       />
       <Stack.Screen
-        name="SignUpCompleted"
-        component={SignUpCompleted}
+        name="IdentityVerification"
+        component={IdentityVerification}
         options={{gestureEnabled: true}}
       />
     </Stack.Navigator>

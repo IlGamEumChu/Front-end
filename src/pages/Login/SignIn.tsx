@@ -13,6 +13,7 @@ const SocialLogin = () => {
   const [id, setId] = useState<string>('');
   const [pw, setPw] = useState<string>('');
   const navigation = useNavigation<StackNavigationProp<LoginStackParamList>>();
+
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: '#3F3D56', alignItems: 'center'}}>
@@ -49,8 +50,15 @@ const SocialLogin = () => {
             justifyContent: 'center',
             backgroundColor: '#FAF5E4',
           }}
+          secureTextEntry={true}
           value={pw}
           onChangeText={v => setPw(v)}
+          onSubmitEditing={() => {
+            // dispatch(setAccessToken('accessToken'));
+            // if (accessToken === 'erer') {
+            navigation.navigate('MainNavigator');
+            // }
+          }}
         />
         <Margin._50 />
         <TouchableOpacity
@@ -60,6 +68,9 @@ const SocialLogin = () => {
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#FAF5E4',
+          }}
+          onPress={() => {
+            navigation.navigate('MainNavigator');
           }}>
           <Text style={{fontSize: 18, color: '#3F3D56'}}>로그인</Text>
         </TouchableOpacity>
